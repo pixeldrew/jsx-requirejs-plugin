@@ -13,7 +13,7 @@ with [RequireJS](http://requirejs.org).
 Download the plugin
 [jsx](https://raw.github.com/philix/jsx-requirejs-plugin/master/js/jsx.js)
 and the modified
-[JSXTransformer](https://raw.github.com/philix/jsx-requirejs-plugin/master/js/JSXTransformer-0.11.0.js).
+[JSXTransformer](https://raw.github.com/philix/jsx-requirejs-plugin/master/js/JSXTransformer-0.11.1.js).
 
 Place this in the directory that is your
 [baseUrl](http://requirejs.org/docs/api.html#config-baseUrl) for your project,
@@ -25,32 +25,34 @@ reimplementation of loading logic, so it should be installed as well.
 ## Usage <a name="usage"></a>
 
 First, you need to configure RequireJS to use Facebook's
-[JSXTransformer](https://raw.github.com/philix/jsx-requirejs-plugin/master/js/JSXTransformer-0.11.0.js)
+[JSXTransformer](https://raw.github.com/philix/jsx-requirejs-plugin/master/js/JSXTransformer-0.11.1.js)
 and [React](http://facebook.github.io/react/index.html):
 
     require.config({
       // ...
 
       paths: {
-        "react": "react-0.11.0",
-        "JSXTransformer": "JSXTransformer-0.11.0"
+        "react": "react-0.11.1",
+        "JSXTransformer": "JSXTransformer-0.11.1"
       }
 
       // ...
     });
 
 Then, you can reference JSX files via the `jsx!` plugin syntax. For example, to load
-the `Timer.jsx` file that is in a `components` directory:
+the `Timer.js` file that is in a `components` directory:
 
     require(['jsx!components/Timer'], function (Timer) {
 
     });
 
 The Plugin is then going to load the JavaScript source file
-`components/Timer.jsx`, parse it with Facebook's JSXTransformer and execute the
+`components/Timer.js`, parse it with Facebook's JSXTransformer and execute the
 resulting JavaScript source.
 
-To make it load a file with a `.jsx` extension (`components/Timer.jsx`) add the following parameter to the RequireJS config object:
+## Configuration options <a name="options"></a>
+
+To load a file with a `.jsx` extension (`components/Timer.jsx`) add the following parameter to the RequireJS config object:
 
     require.config({
       // ...
@@ -94,5 +96,8 @@ script errors in resulting files. A simple solution to this is replacing
 occurrences of `'use strict'` by an expression like `'use ' + 'strict'`.
 
 You don't have to do it if you use the
-[JSXTransformer-0.11.0.js](https://raw.github.com/philix/jsx-requirejs-plugin/master/js/JSXTransformer-0.11.0.js)
-provided here.
+[JSXTransformer-0.11.1.js](https://raw.github.com/philix/jsx-requirejs-plugin/master/js/JSXTransformer-0.11.1.js)
+provided here. Or using the build option `"useStrict":true`
+
+`r.js` also has an issue with JSXTransformers use of source maps, there is no way around this now, either use the one 
+provided or 
